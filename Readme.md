@@ -1,4 +1,4 @@
-# VoxelCore 0.1.3
+# VoxelCore 0.2.0
 
 A client-side Fabric mod for Minecraft 1.20.1 (Java 17), combining a Java core with an optional C++/JNI native library.
 
