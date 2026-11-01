@@ -5,5 +5,6 @@
   "option.voxelcore.profile": "Performance Profile",
   "option.voxelcore.fps_overlay": "FPS Overlay",
   "option.voxelcore.memory_overlay": "Memory Overlay",
-  "option.voxelcore.native_enabled": "Native Acceleration"
+  "option.voxelcore.native_enabled": "Native Acceleration",
+  "option.voxelcore.adaptive": "Adaptive SIMD (OFF = scalar native)"
 }

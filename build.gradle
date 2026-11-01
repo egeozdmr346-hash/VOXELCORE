@@ -144,6 +144,7 @@ def standaloneTests = [
         'com.voxelcore.core.SmokeTest',
         'com.voxelcore.native_bridge.NativeBridgeTest',
         'com.voxelcore.ui.OverlayStatsTest',
+        'com.voxelcore.ui.PerfMonitorTest',
         'com.voxelcore.compat.SodiumCompatTest'
 ]
 standaloneTests.each { cls ->
@@ -181,4 +182,13 @@ jar {
     from("LICENSE") {
         rename { "${it}_${project.base.archivesName.get()}" }
     }
+}
+
+// Java-vs-native benchmark (not part of `check`). Writes build/benchmark-results.txt
+tasks.register('runBenchmark', JavaExec) {
+    group = 'verification'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.voxelcore.bench.Benchmark'
+    args layout.buildDirectory.file('benchmark-results.txt').get().asFile.absolutePath
+    dependsOn tasks.named('testClasses')
 }

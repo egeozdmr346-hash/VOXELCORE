@@ -28,6 +28,6 @@
     "sodium": "*"
   },
   "custom": {
-    "voxelcore:native_version": "0.1.3"
+    "voxelcore:native_version": "0.2.0"
   }
 }

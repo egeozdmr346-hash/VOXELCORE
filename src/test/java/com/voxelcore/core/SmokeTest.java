@@ -21,6 +21,7 @@ public final class SmokeTest {
         testDuplicateIdRejected();
         testEventBusDispatch();
         testConfigRoundTrip();
+        testLegacyProfile();
 
         if (failures == 0) {
             System.out.println("ALL SMOKE TESTS PASSED");
@@ -117,10 +118,27 @@ public final class SmokeTest {
         config.setFpsOverlayEnabled(false);
         config.save();
 
+        config.setAdaptiveEnabled(false);
+        config.setNativeEnabled(false);
+        config.setMemoryOverlayEnabled(true);
+        config.save();
+
         VoxelConfig reloaded = VoxelConfig.loadOrDefault(dir);
+        check("adaptive flag persists", !reloaded.isAdaptiveEnabled());
+        check("native flag persists", !reloaded.isNativeEnabled());
+        check("memory overlay persists", reloaded.isMemoryOverlayEnabled());
         check("profile persists across reload", reloaded.getProfile() == PerformanceProfile.PERFORMANCE);
         check("render distance override persists", reloaded.getRenderDistanceOverride() == 12);
         check("fps overlay flag persists", !reloaded.isFpsOverlayEnabled());
+    }
+
+    static void testLegacyProfile() throws Exception {
+        Path dir = Files.createTempDirectory("voxelcore-config-legacy");
+        Files.writeString(dir.resolve("voxelcore.properties"), "performance.profile=QUALITY\n");
+        check("legacy profile name falls back to BALANCED",
+                VoxelConfig.loadOrDefault(dir).getProfile() == PerformanceProfile.BALANCED);
+        Files.writeString(dir.resolve("voxelcore.properties"), "performance.profile=EXTREME\n");
+        check("EXTREME profile parses", VoxelConfig.loadOrDefault(dir).getProfile() == PerformanceProfile.EXTREME);
     }
 
     static void check(String label, boolean condition) {

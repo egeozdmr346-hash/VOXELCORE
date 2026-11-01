@@ -1,0 +1,22 @@
+# VoxelCore 0.2.0 Java benchmark
+java=21.0.10 os=Linux arch=amd64 cpus=1
+native status: unavailable: library not loaded (Java fallback) | cpu: n/a (native not active)
+NOTE: native engine not active - only Java rows are measured; no native comparison possible.
+result equality Java vs bridge(Java path): IDENTICAL
+
+| operation | implementation | median ns/op | p95 ns/op | p99 ns/op | ops/s (median) | alloc B/op |
+|---|---|---:|---:|---:|---:|---:|
+| countNonZero 4096 shorts (1 section) | Java (JavaImpl) | 2655 | 3177 | 38247 | 376641 | 0.2 |
+| countNonZero 4096 shorts (1 section) | bridge, native OFF | 2619 | 2878 | 3434 | 381867 | 0.0 |
+| countNonZero 98304 shorts (24 sections) | Java (JavaImpl) | 64276 | 69960 | 76310 | 15558 | 0.0 |
+| countNonZero 98304 shorts (24 sections) | bridge, native OFF | 63101 | 68087 | 72319 | 15848 | 0.0 |
+| sectionStats 4096 shorts | Java (JavaImpl) | 7960 | 8884 | 9699 | 125631 | 0.0 |
+| sectionStats 4096 shorts | bridge, native OFF | 7954 | 8881 | 10681 | 125725 | 0.0 |
+| frustumCull 10000 boxes | Java (JavaImpl) | 208797 | 252410 | 254698 | 4789 | 0.0 |
+| frustumCull 10000 boxes | bridge, native OFF | 205321 | 227328 | 235562 | 4870 | 0.0 |
+| distanceSq 100000 points | Java (JavaImpl) | 109505 | 117772 | 125355 | 9132 | 0.0 |
+| distanceSq 100000 points | bridge, native OFF | 172110 | 187094 | 196631 | 5810 | 0.0 |
+
+Notes: 'Java' = JavaImpl called directly. 'native (EXTREME)' = NativeBridge with native forced on for every
+size, i.e. includes argument validation + JNI transition + C++ kernel. 'bridge, native OFF' = same API with
+native disabled (Java path plus validation). No Minecraft FPS conclusions can be drawn from these numbers.

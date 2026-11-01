@@ -27,7 +27,9 @@ public final class VoxelCoreClient implements ClientModInitializer {
                 "category.voxelcore.general"
         ));
 
+        ClientTickEvents.START_CLIENT_TICK.register(c -> HudOverlay.perf().onTickStart(System.nanoTime()));
         ClientTickEvents.END_CLIENT_TICK.register(VoxelCoreClient::onClientTick);
+        ClientTickEvents.END_CLIENT_TICK.register(c -> HudOverlay.perf().onTickEnd(System.nanoTime()));
         HudOverlay.register();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> Bootstrap.get().shutdown(), "VoxelCore-Shutdown"));

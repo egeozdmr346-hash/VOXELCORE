@@ -27,6 +27,7 @@ public final class VoxelConfig {
     private static final String KEY_SHOW_FPS_OVERLAY = "ui.showFpsOverlay";
     private static final String KEY_SHOW_MEMORY_OVERLAY = "ui.showMemoryOverlay";
     private static final String KEY_NATIVE_ENABLED = "native.enabled";
+    private static final String KEY_NATIVE_ADAPTIVE = "native.adaptive";
 
     private final Path path;
     private final Properties props = new Properties();
@@ -74,6 +75,7 @@ public final class VoxelConfig {
         props.setProperty(KEY_SHOW_FPS_OVERLAY, "true");
         props.setProperty(KEY_SHOW_MEMORY_OVERLAY, "false");
         props.setProperty(KEY_NATIVE_ENABLED, "true");
+        props.setProperty(KEY_NATIVE_ADAPTIVE, "true");
     }
 
     public PerformanceProfile getProfile() {
@@ -118,6 +120,14 @@ public final class VoxelConfig {
 
     public void setNativeEnabled(boolean enabled) {
         props.setProperty(KEY_NATIVE_ENABLED, Boolean.toString(enabled));
+    }
+
+    public boolean isAdaptiveEnabled() {
+        return parseBoolOr(props.getProperty(KEY_NATIVE_ADAPTIVE), true);
+    }
+
+    public void setAdaptiveEnabled(boolean enabled) {
+        props.setProperty(KEY_NATIVE_ADAPTIVE, Boolean.toString(enabled));
     }
 
     private static int parseIntOr(String value, int fallback) {

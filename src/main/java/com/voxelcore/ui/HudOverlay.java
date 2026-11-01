@@ -14,6 +14,11 @@ import net.minecraft.client.gui.DrawContext;
 public final class HudOverlay {
 
     private static final OverlayStats STATS = new OverlayStats();
+    private static final PerfMonitor PERF = new PerfMonitor();
+
+    public static PerfMonitor perf() {
+        return PERF;
+    }
 
     private HudOverlay() { }
 
@@ -22,7 +27,10 @@ public final class HudOverlay {
     }
 
     private static void render(DrawContext context, float tickDelta) {
-        STATS.onFrame(System.nanoTime());
+        long now = System.nanoTime();
+        STATS.onFrame(now);
+        PERF.onFrame(now);
+        PERF.refreshIfDue(now);
 
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.options.hudHidden) {
@@ -32,7 +40,8 @@ public final class HudOverlay {
 
         int y = 4;
         if (config.isFpsOverlayEnabled()) {
-            context.drawTextWithShadow(client.textRenderer, STATS.fpsText(), 4, y, 0xFFFFFF);
+            context.drawTextWithShadow(client.textRenderer, String.format("%s (avg %.1f ms, p99 %.1f ms)",
+                    STATS.fpsText(), PERF.frameAvgMs(), PERF.frameP99Ms()), 4, y, 0xFFFFFF);
             y += 10;
         }
         if (config.isMemoryOverlayEnabled()) {

@@ -32,7 +32,7 @@ public final class VoxelCoreScreen extends Screen {
         this.config = Bootstrap.get().config();
 
         int centerX = this.width / 2;
-        int y = this.height / 2 - 60;
+        int y = 28;
 
         this.addDrawableChild(CyclingButtonWidget.<PerformanceProfile>builder(
                         profile -> Text.literal(profile.name()))
@@ -40,21 +40,12 @@ public final class VoxelCoreScreen extends Screen {
                 .initially(config.getProfile())
                 .build(centerX - 100, y, 200, 20,
                         Text.translatable("option.voxelcore.profile"),
-                        (button, value) -> config.setProfile(value)));
+                        (button, value) -> {
+                            config.setProfile(value);
+                            NativeBridge.applyProfile(value);
+                        }));
 
-        y += 24;
-        this.addDrawableChild(CyclingButtonWidget.onOffBuilder(config.isFpsOverlayEnabled())
-                .build(centerX - 100, y, 200, 20,
-                        Text.translatable("option.voxelcore.fps_overlay"),
-                        (button, value) -> config.setFpsOverlayEnabled(value)));
-
-        y += 24;
-        this.addDrawableChild(CyclingButtonWidget.onOffBuilder(config.isMemoryOverlayEnabled())
-                .build(centerX - 100, y, 200, 20,
-                        Text.translatable("option.voxelcore.memory_overlay"),
-                        (button, value) -> config.setMemoryOverlayEnabled(value)));
-
-        y += 24;
+        y += 22;
         this.addDrawableChild(CyclingButtonWidget.onOffBuilder(config.isNativeEnabled())
                 .build(centerX - 100, y, 200, 20,
                         Text.translatable("option.voxelcore.native_enabled"),
@@ -63,7 +54,28 @@ public final class VoxelCoreScreen extends Screen {
                             NativeBridge.setEnabled(value);
                         }));
 
-        y += 32;
+        y += 22;
+        this.addDrawableChild(CyclingButtonWidget.onOffBuilder(config.isAdaptiveEnabled())
+                .build(centerX - 100, y, 200, 20,
+                        Text.translatable("option.voxelcore.adaptive"),
+                        (button, value) -> {
+                            config.setAdaptiveEnabled(value);
+                            NativeBridge.setAdaptive(value);
+                        }));
+
+        y += 22;
+        this.addDrawableChild(CyclingButtonWidget.onOffBuilder(config.isFpsOverlayEnabled())
+                .build(centerX - 100, y, 200, 20,
+                        Text.translatable("option.voxelcore.fps_overlay"),
+                        (button, value) -> config.setFpsOverlayEnabled(value)));
+
+        y += 22;
+        this.addDrawableChild(CyclingButtonWidget.onOffBuilder(config.isMemoryOverlayEnabled())
+                .build(centerX - 100, y, 200, 20,
+                        Text.translatable("option.voxelcore.memory_overlay"),
+                        (button, value) -> config.setMemoryOverlayEnabled(value)));
+
+        y += 28;
         this.addDrawableChild(ButtonWidget.builder(Text.translatable("gui.done"), button -> this.close())
                 .dimensions(centerX - 100, y, 200, 20)
                 .build());
@@ -74,18 +86,26 @@ public final class VoxelCoreScreen extends Screen {
         this.renderBackground(context); // 1.20.1 Yarn signature: renderBackground(DrawContext)
         super.render(context, mouseX, mouseY, delta);
 
-        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 20, 0xFFFFFF);
+        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 12, 0xFFFFFF);
 
-        String sodiumLine = "Sodium: " + Bootstrap.get().sodiumCompat().statusLabel();
-        String nativeLine = "Native: " + (!NativeBridge.isEnabled()
-                ? "disabled in settings (Java)"
-                : NativeBridge.isNativeActive()
-                        ? "active (v" + NativeBridge.nativeVersion() + ")"
-                        : "library unavailable (Java fallback)");
-        context.drawCenteredTextWithShadow(this.textRenderer, Text.literal(sodiumLine),
-                this.width / 2, this.height - 40, 0xAAAAAA);
-        context.drawCenteredTextWithShadow(this.textRenderer, Text.literal(nativeLine),
-                this.width / 2, this.height - 28, 0xAAAAAA);
+        PerfMonitor perf = HudOverlay.perf();
+        String[] lines = {
+                "Native: " + NativeBridge.statusText() + " | v" + NativeBridge.nativeVersion()
+                        + " (expects " + NativeBridge.EXPECTED_NATIVE_VERSION + ")",
+                "CPU: " + NativeBridge.cpuCapabilityText(),
+                "Calls: " + NativeBridge.nativeCallCount() + " native / " + NativeBridge.javaCallCount()
+                        + " Java fallback / " + NativeBridge.nativeFailureCount() + " native failures",
+                String.format("Frame avg %.1f ms, p99 %.1f ms | Tick avg %.2f ms",
+                        perf.frameAvgMs(), perf.frameP99Ms(), perf.tickAvgMs()),
+                OverlayStats.memoryText(),
+                "Engine functions are not called by gameplay code yet (benchmark/API only)."
+        };
+        int ly = 188;
+        for (String line : lines) {
+            context.drawCenteredTextWithShadow(this.textRenderer, Text.literal(line),
+                    this.width / 2, ly, 0xAAAAAA);
+            ly += 10;
+        }
     }
 
     @Override

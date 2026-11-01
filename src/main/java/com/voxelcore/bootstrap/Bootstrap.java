@@ -47,6 +47,8 @@ public final class Bootstrap {
         Path configDir = FabricLoader.getInstance().getConfigDir().resolve("voxelcore");
         this.config = VoxelConfig.loadOrDefault(configDir);
         NativeBridge.setEnabled(config.isNativeEnabled());
+        NativeBridge.setAdaptive(config.isAdaptiveEnabled());
+        NativeBridge.applyProfile(config.getProfile());
         LOGGER.log(Level.INFO, "VoxelCore config loaded from " + configDir);
     }
 
@@ -65,8 +67,8 @@ public final class Bootstrap {
 
     private void logEnvironmentSummary() {
         boolean nativeActive = NativeBridge.isNativeActive();
-        String nativeState = !NativeBridge.isEnabled() ? "disabled-by-config"
-                : nativeActive ? "active (v" + NativeBridge.nativeVersion() + ")" : "unavailable (Java fallback)";
+        String nativeState = nativeActive ? "active (v" + NativeBridge.nativeVersion() + ", " + NativeBridge.cpuCapabilityText() + ")"
+                : NativeBridge.statusText();
         LOGGER.log(Level.INFO, String.format(
                 "VoxelCore %s starting | MC 1.20.1 | Java %s | %s | native=%s | profile=%s",
                 modVersion(),

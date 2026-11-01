@@ -1,0 +1,12 @@
+cpu features=0xf best simd level=2
+count_nonzero n=4096     scalar       1456 ns    5.63 GB/s
+count_nonzero n=4096     sse2          280 ns   29.26 GB/s
+count_nonzero n=4096     avx2          136 ns   60.24 GB/s
+count_nonzero n=98304    scalar      34223 ns    5.74 GB/s
+count_nonzero n=98304    sse2         5783 ns   34.00 GB/s
+count_nonzero n=98304    avx2         3605 ns   54.54 GB/s
+count_nonzero n=1000000  scalar     391725 ns    5.11 GB/s
+count_nonzero n=1000000  sse2        63720 ns   31.39 GB/s
+count_nonzero n=1000000  avx2        46156 ns   43.33 GB/s
+frustum_cull n=10000     168750 ns  16.9 ns/box
+distance_sq n=100000      98323 ns  0.98 ns/point
