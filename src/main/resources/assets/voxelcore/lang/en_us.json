@@ -1,0 +1,9 @@
+{
+  "key.voxelcore.open_settings": "Open VoxelCore Settings (Shift+V)",
+  "category.voxelcore.general": "VoxelCore",
+  "screen.voxelcore.settings": "VoxelCore Settings",
+  "option.voxelcore.profile": "Performance Profile",
+  "option.voxelcore.fps_overlay": "FPS Overlay",
+  "option.voxelcore.memory_overlay": "Memory Overlay",
+  "option.voxelcore.native_enabled": "Native Acceleration"
+}

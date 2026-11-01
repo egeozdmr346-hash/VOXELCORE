@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "voxelcore",
+  "version": "${version}",
+  "name": "VoxelCore",
+  "description": "Modular high-performance client framework for Minecraft 1.20.1. Java/C++ hybrid engine with a Sodium compatibility layer.",
+  "authors": ["VoxelCore Project"],
+  "contact": {
+    "homepage": "https://example.invalid/voxelcore",
+    "sources": "https://example.invalid/voxelcore"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "main": ["com.voxelcore.VoxelCore"],
+    "client": ["com.voxelcore.VoxelCoreClient"]
+  },
+  "mixins": [
+    "voxelcore.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "fabric-api": "*",
+    "minecraft": "1.20.1",
+    "java": ">=17"
+  },
+  "suggests": {
+    "sodium": "*"
+  },
+  "custom": {
+    "voxelcore:native_version": "0.1.3"
+  }
+}

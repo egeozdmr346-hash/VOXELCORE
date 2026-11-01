@@ -1,0 +1,184 @@
+plugins {
+    id 'fabric-loom' version '1.6.12'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    maven { url = "https://api.modrinth.com/maven" } // Sodium, Lithium, etc. mirrors
+    maven { url = "https://maven.terraformersmc.com/releases/" } // ModMenu
+    mavenCentral()
+}
+
+loom {
+    // Native (C++) library bundled as a loaded resource, extracted at runtime by
+    // com.voxelcore.native_bridge.NativeLoader — not a Loom-managed dependency.
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    // Sodium is a *soft* / compile-time-only dependency: VoxelCore must load and
+    // run with Sodium absent. Never modImplementation (that would hard-require it
+    // and bundle/transform its classes). modCompileOnly makes its classes visible
+    // for our SodiumCompat reflection/mixin targets without requiring it at runtime.
+    modCompileOnly "maven.modrinth:sodium:${project.sodium_version}"
+}
+
+// --- Native (C++/JNI) build wiring (OPTIONAL) ------------------------------------------
+// The native library is an optional accelerator; NativeBridge has a pure-Java fallback.
+// -PbuildNative=auto  (default) build native only if `cmake` is found on PATH; if cmake or
+//                     a C++ compiler is missing/failing, warn and still build the Java mod.
+// -PbuildNative=false never build native.
+// -PbuildNative=true  build native and FAIL the build if it cannot be built.
+// NOTE: a native library built here only works on the OS it was built on. A jar built on
+// Windows needs voxelcore_native_windows_x64.dll (built by MSVC/MinGW via CMake).
+tasks.named('compileJava') {
+    options.headerOutputDirectory.set(layout.buildDirectory.dir("generated/sources/headers"))
+}
+
+def nativeMode = (project.findProperty('buildNative') ?: 'auto').toString().toLowerCase()
+def cmakeFound = {
+    try {
+        def p = new ProcessBuilder('cmake', '--version').redirectErrorStream(true).start()
+        p.inputStream.readAllBytes()
+        return p.waitFor() == 0
+    } catch (Exception ignored) {
+        return false
+    }
+}()
+def nativeStrict = nativeMode == 'true'
+def nativeEnabled = nativeMode != 'false' && cmakeFound
+
+if (nativeStrict && !cmakeFound) {
+    throw new GradleException("-PbuildNative=true was given but 'cmake' was not found on PATH.")
+}
+
+if (!nativeEnabled) {
+    logger.lifecycle("[voxelcore] Native build skipped (" +
+            (nativeMode == 'false' ? "-PbuildNative=false" : "cmake not found") +
+            "). The jar will use the pure-Java fallback.")
+    // Make sure natives left over from an earlier build can't end up in this jar.
+    tasks.named('processResources') {
+        doFirst { project.delete(layout.buildDirectory.dir("resources/main/natives")) }
+    }
+} else {
+    def nativeBuildDir = layout.buildDirectory.dir("native").get().asFile
+    def nativeStagingRoot = layout.buildDirectory.dir("generated/native-resources").get().asFile
+    def nativeState = [configured: false, built: false]
+
+    // Remove every artifact of earlier (possibly failed or foreign-platform) native builds so
+    // stale binaries can never be packaged into the jar.
+    tasks.register('cleanNativeArtifacts', Delete) {
+        group = 'voxelcore'
+        delete nativeBuildDir, nativeStagingRoot, layout.buildDirectory.dir("resources/main/natives")
+    }
+
+    tasks.register('configureNative', Exec) {
+        group = 'voxelcore'
+        description = 'Runs CMake configure for the optional native library.'
+        dependsOn tasks.named('compileJava'), tasks.named('cleanNativeArtifacts')
+        doFirst { nativeBuildDir.mkdirs() }
+        workingDir nativeBuildDir
+        ignoreExitValue = !nativeStrict
+        commandLine 'cmake',
+                "-DJNI_HEADERS_DIR=${layout.buildDirectory.dir('generated/sources/headers').get().asFile}",
+                '-DCMAKE_BUILD_TYPE=Release',
+                project.file('native')
+        doLast {
+            nativeState.configured = executionResult.get().exitValue == 0
+            if (!nativeState.configured) {
+                logger.warn("[voxelcore] CMake configure failed (no C++ compiler?). Continuing without native library.")
+            }
+        }
+    }
+
+    tasks.register('buildNative', Exec) {
+        group = 'voxelcore'
+        description = 'Compiles the optional native library.'
+        dependsOn tasks.named('configureNative')
+        onlyIf { nativeState.configured }
+        workingDir nativeBuildDir
+        ignoreExitValue = !nativeStrict
+        commandLine 'cmake', '--build', '.', '--config', 'Release'
+        doLast {
+            nativeState.built = executionResult.get().exitValue == 0
+            if (!nativeState.built) {
+                logger.warn("[voxelcore] Native compile failed. Continuing without native library.")
+            }
+        }
+    }
+
+    // Only copies when THIS run's build succeeded; the staging dir was wiped first.
+    tasks.register('copyNative', Copy) {
+        group = 'voxelcore'
+        description = 'Stages the freshly built native library for packaging.'
+        dependsOn tasks.named('buildNative')
+        onlyIf { nativeState.built }
+        from(nativeBuildDir) {
+            include '**/voxelcore_native_*.dll', '**/voxelcore_native_*.so', '**/voxelcore_native_*.dylib'
+            exclude 'CMakeFiles/**'
+            eachFile { it.path = it.name }
+            includeEmptyDirs = false
+        }
+        into new File(nativeStagingRoot, 'natives')
+    }
+
+    tasks.named('processResources') {
+        dependsOn tasks.named('copyNative')
+        from(nativeStagingRoot) { include 'natives/**' }
+    }
+}
+
+// Plain-java tests (no JUnit): run as part of `check`.
+def standaloneTests = [
+        'com.voxelcore.core.SmokeTest',
+        'com.voxelcore.native_bridge.NativeBridgeTest',
+        'com.voxelcore.ui.OverlayStatsTest',
+        'com.voxelcore.compat.SodiumCompatTest'
+]
+standaloneTests.each { cls ->
+    def name = 'run' + cls.substring(cls.lastIndexOf('.') + 1)
+    tasks.register(name, JavaExec) {
+        group = 'verification'
+        classpath = sourceSets.test.runtimeClasspath
+        mainClass = cls
+        systemProperty 'voxelcore.expectedNativeVersion', project.version.toString()
+        dependsOn tasks.named('testClasses')
+    }
+    tasks.named('check') { dependsOn tasks.named(name) }
+}
+// -----------------------------------------------------------------------------------------
+
+processResources {
+    inputs.property "version", project.version
+    filteringCharset "UTF-8"
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.base.archivesName.get()}" }
+    }
+}
