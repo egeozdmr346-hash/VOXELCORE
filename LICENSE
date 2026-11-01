@@ -1,21 +1,292 @@
-MIT License
+VOXELCORE CUSTOM SOURCE-AVAILABLE LICENSE
+Version 1.0
 
-Copyright (c) 2026 VoxelCore Project
+Copyright (c) 2026 [Ege]
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Project: VoxelCore
+Author and Copyright Holder: [Ege]
+Contact: [egeozdmr346@gmail.com]
+Repository: https://github.com/egeozdmr346-hash/VOXELCORE
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+---
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+# PART I — ENGLISH VERSION
+
+## 1. Definitions
+
+“VoxelCore” means the software project, its source code, binaries, documentation, associated files, updates, and official releases.
+
+“Licensor” means the copyright holder of VoxelCore.
+
+“User” means any individual or organization accessing, using, modifying, or distributing VoxelCore.
+
+“Commercial Use” means using, incorporating, distributing, selling, licensing, or otherwise exploiting VoxelCore, directly or indirectly, for commercial advantage or monetary compensation.
+
+“Net Profit” means the revenue attributable to commercial products or services that use, incorporate, or distribute VoxelCore, minus the permitted and documented direct expenses defined in Section 6.
+
+## 2. Non-Commercial Permission
+
+Subject to the terms of this License, the Licensor grants every User a worldwide, non-exclusive, royalty-free permission to:
+
+- Access and inspect the VoxelCore source code.
+- Use VoxelCore for personal, educational, research, and other non-commercial purposes.
+- Modify the source code for non-commercial purposes.
+- Share original or modified copies for non-commercial purposes.
+- Create and share non-commercial derivative works.
+
+Any copy or derivative work distributed under this permission must retain the applicable copyright notices and a copy of this License.
+
+## 3. Commercial Use Requires Permission
+
+Commercial Use is **not permitted** under this License alone.
+
+Any person or organization wishing to use VoxelCore commercially must first obtain explicit written permission from the Licensor and enter into a separate Commercial License Agreement.
+
+Without that written permission, no User may:
+
+- Sell VoxelCore or a product containing VoxelCore.
+- Include VoxelCore in a paid product, service, modpack, or software package.
+- Use VoxelCore to provide paid services.
+- Monetize a product or service through its use of VoxelCore.
+- Distribute VoxelCore as part of a commercial offering.
+
+The Licensor may approve or reject commercial license requests.
+
+## 4. Commercial Royalty
+
+Unless a separate written agreement expressly provides otherwise, an approved commercial licensee must pay the Licensor **10% of the Net Profit** attributable to the commercial use of VoxelCore.
+
+This royalty applies only to commercial activities covered by the relevant Commercial License Agreement.
+
+The separate agreement must identify the licensed products, permitted activities, reporting requirements, payment schedule, and any agreed exceptions.
+
+## 5. Ownership and Intellectual Property
+
+VoxelCore and its original components remain the intellectual property of the Licensor and their respective contributors.
+
+This License does not transfer ownership of VoxelCore to any User or commercial licensee.
+
+Users retain ownership of their independently created contributions, subject to any separate agreements and applicable third-party rights.
+
+No rights to the VoxelCore name, logo, or trademarks are granted by this License. Any commercial use of those marks requires separate written permission.
+
+## 6. Net Profit Calculation
+
+For the purpose of calculating the 10% royalty:
+
+**Net Profit = Attributable Revenue − Permitted Direct Expenses**
+
+“Attributable Revenue” means revenue reasonably attributable to products or services that use, incorporate, or distribute VoxelCore.
+
+If VoxelCore is included in a larger product, revenue must be allocated using a reasonable, consistent, and documented method reflecting VoxelCore's contribution to that product.
+
+“Permitted Direct Expenses” means reasonable, necessary, directly attributable, and documented costs of producing, distributing, and selling the relevant commercial product or service.
+
+General company overhead, unrelated business expenses, artificial or inflated expenses, and costs not directly attributable to the licensed commercial activity may not be deducted.
+
+Sales taxes, VAT, and similar transaction taxes collected on behalf of authorities are excluded from revenue. Income taxes are not deductible unless the separate Commercial License Agreement expressly allows them.
+
+The licensee must maintain accurate financial records supporting its calculations.
+
+## 7. Reporting, Payment, and Audit
+
+Unless otherwise agreed in writing:
+
+- Royalty calculations must be prepared quarterly.
+- The licensee must submit a report within 30 days after the end of each calendar quarter.
+- The 10% royalty must be paid within the same 30-day period.
+- Reports must include attributable revenue, permitted expenses, Net Profit, and the royalty due.
+
+The Licensor may, upon reasonable prior notice and no more than once per calendar year, request access to relevant records to verify royalty calculations.
+
+If an audit identifies an underpayment of more than 5% for the audited period, the licensee must pay the shortfall and reasonable audit costs.
+
+## 8. Termination
+
+Permission under this License terminates automatically if a User materially violates its terms.
+
+Where the violation can be corrected, the User will have 30 days after receiving written notice to correct it.
+
+Upon termination, the User must stop the activities that are no longer authorized and stop distributing the affected copies.
+
+Termination does not remove payment obligations or other liabilities that arose before termination.
+
+## 9. Disclaimer of Warranty and Liability
+
+VoxelCore is provided “AS IS”, without warranties of any kind, express or implied.
+
+The Licensor does not guarantee that VoxelCore will be error-free, secure, compatible with every system, or suitable for any particular purpose.
+
+To the maximum extent permitted by applicable law, the Licensor shall not be liable for damages arising from the use or inability to use VoxelCore.
+
+Nothing in this section excludes liability that cannot legally be excluded.
+
+## 10. Third-Party Components
+
+VoxelCore may include or depend on third-party software, libraries, or assets.
+
+Such components remain subject to their own licenses and terms. This License does not replace or override those third-party licenses.
+
+## 11. Changes to This License
+
+The Licensor may publish new versions of this License.
+
+Unless expressly stated otherwise, a new version does not retroactively change the terms applicable to copies or permissions already granted under an earlier version.
+
+Commercial agreements already signed remain governed by their own terms unless the parties agree otherwise in writing.
+
+## 12. Governing Law
+
+This License and disputes arising under it shall be governed by the laws of **[Country / Jurisdiction]**, without regard to conflict-of-law rules.
+
+The competent courts of **[City / Country]** shall have jurisdiction, subject to mandatory applicable law.
+
+## 13. Acceptance
+
+By using, modifying, or distributing VoxelCore under this License, the User agrees to its applicable terms.
+
+Commercial Use requires a separate written agreement with the Licensor.
+
+---
+
+# PART II — TÜRKÇE VERSİYON
+
+## 1. Tanımlar
+
+“VoxelCore”; yazılım projesini, kaynak kodlarını, derlenmiş dosyalarını, belgelerini, ilgili dosyalarını, güncellemelerini ve resmî sürümlerini ifade eder.
+
+“Lisans Veren”; VoxelCore'un telif hakkı sahibini ifade eder.
+
+“Kullanıcı”; VoxelCore'a erişen, onu kullanan, değiştiren veya dağıtan gerçek ya da tüzel kişiyi ifade eder.
+
+“Ticari Kullanım”; VoxelCore'un doğrudan veya dolaylı olarak ticari avantaj ya da maddi kazanç amacıyla kullanılması, bir ürüne veya hizmete eklenmesi, dağıtılması, satılması, lisanslanması veya başka şekilde ticarileştirilmesidir.
+
+“Net Kâr”; VoxelCore'u kullanan, içeren veya dağıtan ticari ürün ya da hizmetlerden elde edilen ve 6. maddede tanımlanan izin verilen, belgelenmiş doğrudan giderler düşüldükten sonra kalan geliri ifade eder.
+
+## 2. Ticari Olmayan Kullanım İzni
+
+Lisans Veren, bu lisansın şartlarına uyulması koşuluyla tüm Kullanıcılara dünya çapında, münhasır olmayan ve ücretsiz olarak aşağıdaki izinleri verir:
+
+- VoxelCore kaynak koduna erişmek ve kaynak kodunu incelemek.
+- VoxelCore'u kişisel, eğitim, araştırma ve diğer ticari olmayan amaçlarla kullanmak.
+- Kaynak kodunu ticari olmayan amaçlarla değiştirmek.
+- Orijinal veya değiştirilmiş kopyaları ticari olmayan amaçlarla paylaşmak.
+- Ticari olmayan türev çalışmalar oluşturmak ve paylaşmak.
+
+Bu izin kapsamında dağıtılan her kopyada veya türev çalışmada ilgili telif hakkı bildirimleri ve bu lisansın bir kopyası korunmalıdır.
+
+## 3. Ticari Kullanım İçin İzin Zorunluluğu
+
+**Bu lisans tek başına Ticari Kullanım hakkı vermez.**
+
+VoxelCore'u ticari amaçlarla kullanmak isteyen gerçek veya tüzel kişiler, önceden Lisans Veren'den açık ve yazılı izin almalı ve ayrı bir Ticari Lisans Sözleşmesi imzalamalıdır.
+
+Bu yazılı izin olmadan hiçbir Kullanıcı:
+
+- VoxelCore'u veya VoxelCore içeren bir ürünü satamaz.
+- VoxelCore'u ücretli bir ürüne, hizmete, mod paketine veya yazılım paketine ekleyemez.
+- VoxelCore kullanarak ücretli hizmet sunamaz.
+- VoxelCore kullanımı üzerinden bir ürünü veya hizmeti gelir elde edecek şekilde ticarileştiremez.
+- VoxelCore'u ticari bir teklifin veya ürünün parçası olarak dağıtamaz.
+
+Lisans Veren, ticari lisans başvurularını kabul veya reddetme hakkını saklı tutar.
+
+## 4. Ticari Gelir Payı
+
+Ayrı bir yazılı sözleşmede açıkça farklı bir oran kararlaştırılmadığı sürece, ticari kullanım izni verilen lisans sahibi, VoxelCore'un ticari kullanımından elde edilen **Net Kârın %10'unu** Lisans Veren'e ödemekle yükümlüdür.
+
+Bu gelir payı yalnızca ilgili Ticari Lisans Sözleşmesi kapsamında izin verilen ticari faaliyetler için geçerlidir.
+
+Ayrı sözleşmede lisans verilen ürünler, izin verilen faaliyetler, raporlama şartları, ödeme takvimi ve varsa özel istisnalar belirtilmelidir.
+
+## 5. Mülkiyet ve Fikrî Mülkiyet Hakları
+
+VoxelCore ve özgün bileşenleri, Lisans Veren'in ve ilgili katkı sahiplerinin fikrî mülkiyeti olarak kalır.
+
+Bu lisans, VoxelCore'un mülkiyetini herhangi bir Kullanıcıya veya ticari lisans sahibine devretmez.
+
+Kullanıcılar, bağımsız olarak oluşturdukları katkıların mülkiyetini, ayrı sözleşmeler ve üçüncü taraf hakları saklı kalmak kaydıyla korurlar.
+
+Bu lisans, VoxelCore adı, logosu veya markaları üzerinde herhangi bir hak vermez. Bu markaların ticari amaçlarla kullanılması için ayrıca yazılı izin alınmalıdır.
+
+## 6. Net Kâr Hesaplaması
+
+%10 gelir payının hesaplanmasında:
+
+**Net Kâr = VoxelCore'a Atfedilebilir Gelir − İzin Verilen Doğrudan Giderler**
+
+“VoxelCore'a Atfedilebilir Gelir”; VoxelCore'u kullanan, içeren veya dağıtan ürün ya da hizmetlerden makul şekilde VoxelCore'a atfedilebilen gelirdir.
+
+VoxelCore daha büyük bir ürünün parçasıysa, gelir VoxelCore'un o ürüne katkısını yansıtan makul, tutarlı ve belgelenebilir bir yöntemle paylaştırılmalıdır.
+
+“İzin Verilen Doğrudan Giderler”; ilgili ticari ürün veya hizmetin üretilmesi, dağıtılması ve satılması için yapılan makul, gerekli, doğrudan bağlantılı ve belgelenmiş giderlerdir.
+
+Genel şirket giderleri, ilgisiz işletme giderleri, yapay veya şişirilmiş giderler ve lisans verilen ticari faaliyetle doğrudan bağlantısı bulunmayan maliyetler Net Kâr hesabından düşülemez.
+
+Kamu kurumları adına tahsil edilen satış vergisi, KDV ve benzeri işlem vergileri gelir hesabına dahil edilmez. Ayrı Ticari Lisans Sözleşmesi açıkça izin vermediği sürece gelir veya kurumlar vergisi gider olarak düşülemez.
+
+Lisans sahibi, hesaplamalarını destekleyen doğru ve eksiksiz mali kayıtları tutmakla yükümlüdür.
+
+## 7. Raporlama, Ödeme ve Denetim
+
+Yazılı olarak farklı bir anlaşma yapılmadığı sürece:
+
+- Gelir payı hesaplamaları üç ayda bir yapılır.
+- Lisans sahibi, her takvim çeyreğinin bitiminden sonraki 30 gün içinde rapor sunar.
+- %10 gelir payı aynı 30 günlük süre içinde ödenir.
+- Raporlarda VoxelCore'a atfedilebilir gelir, izin verilen giderler, Net Kâr ve ödenecek gelir payı gösterilir.
+
+Lisans Veren, makul bir ön bildirimde bulunarak ve takvim yılı başına bir defayı aşmamak kaydıyla gelir payı hesaplamalarını doğrulamak için ilgili kayıtları incelemeyi talep edebilir.
+
+Denetimde, incelenen dönem için %5'ten fazla eksik ödeme tespit edilirse lisans sahibi eksik tutarı ve makul denetim masraflarını ödemekle yükümlüdür.
+
+## 8. Lisansın Sona Ermesi
+
+Bir Kullanıcının bu lisansın önemli hükümlerini ihlal etmesi hâlinde lisans kapsamındaki izinleri otomatik olarak sona erer.
+
+İhlalin giderilebilir olması durumunda Kullanıcıya yazılı bildirimin ardından ihlali düzeltmesi için 30 gün süre verilir.
+
+Lisans sona erdiğinde Kullanıcı, artık izin verilmeyen faaliyetleri durdurmalı ve etkilenen kopyaları dağıtmayı bırakmalıdır.
+
+Lisansın sona ermesi, sona erme tarihinden önce doğmuş ödeme yükümlülüklerini veya diğer sorumlulukları ortadan kaldırmaz.
+
+## 9. Garanti ve Sorumluluk Reddi
+
+VoxelCore, açık veya zımni herhangi bir garanti verilmeksizin, **“OLDUĞU GİBİ”** sunulur.
+
+Lisans Veren; VoxelCore'un hatasız, güvenli, her sistemle uyumlu veya belirli bir amaca uygun olacağını garanti etmez.
+
+Yürürlükteki hukukun izin verdiği azami ölçüde Lisans Veren, VoxelCore'un kullanılmasından veya kullanılamamasından doğan zararlardan sorumlu tutulamaz.
+
+Bu madde, kanunen hariç tutulması mümkün olmayan sorumlulukları ortadan kaldırmaz.
+
+## 10. Üçüncü Taraf Bileşenleri
+
+VoxelCore, üçüncü taraf yazılımlar, kütüphaneler veya varlıklar içerebilir ya da bunlara bağlı olabilir.
+
+Bu bileşenler kendi lisans ve kullanım şartlarına tabi olmaya devam eder. Bu lisans, üçüncü taraf lisanslarının yerine geçmez veya onları geçersiz kılmaz.
+
+## 11. Lisans Değişiklikleri
+
+Lisans Veren bu lisansın yeni sürümlerini yayımlayabilir.
+
+Açıkça aksi belirtilmediği sürece yeni sürüm, önceki bir sürüm kapsamında daha önce verilmiş kopyaların veya izinlerin şartlarını geriye dönük olarak değiştirmez.
+
+Daha önce imzalanmış ticari sözleşmeler, taraflar yazılı olarak başka şekilde anlaşmadıkça kendi hükümlerine tabi olmaya devam eder.
+
+## 12. Uygulanacak Hukuk
+
+Bu lisans ve lisanstan doğan uyuşmazlıklar, kanunlar ihtilafı kuralları dikkate alınmaksızın **[Ülke / Hukuk Sistemi]** hukukuna tabi olacaktır.
+
+Zorunlu hukuk kuralları saklı kalmak kaydıyla **[Şehir / Ülke]** mahkemeleri yetkilidir.
+
+## 13. Kabul
+
+Kullanıcı, VoxelCore'u bu lisans kapsamında kullanarak, değiştirerek veya dağıtarak kendisi için geçerli olan lisans şartlarını kabul etmiş sayılır.
+
+Ticari Kullanım için Lisans Veren ile ayrıca yazılı bir sözleşme yapılması zorunludur.
+
+---
+
+**END OF LICENSE / LİSANS SONU**
+
